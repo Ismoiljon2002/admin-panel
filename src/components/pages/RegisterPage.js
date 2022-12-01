@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import '../../App.css'
 
-export default function SignUpPage() {
+export default function SignUpPage({setIsAuth}) {
 
     const nameInput = useRef();
     const emailInput = useRef();
     const passwordInput = useRef();
-    
     function registerUser(e) {
         e.preventDefault();
         const regisrationTime = new Date();
@@ -26,10 +25,14 @@ export default function SignUpPage() {
         })
         .then(data => {
             console.log(data, "came from user reg...")
-            if ( data.status === 200) {
-                alert("register success")
+            if ( data.data.status === "OK") {
+                setIsAuth(true);
+                
+                alert("register success");
                 window.localStorage.setItem("token", data.data.data)
-                // window.location.href = './userData'
+                window.location.href = './userData'
+            } else {
+                alert('This email already registered! ')
             }
         })  
     }

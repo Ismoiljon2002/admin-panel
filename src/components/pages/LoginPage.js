@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import '../../App.css'
 
-export default function SignInPage() {
+export default function SignInPage({setIsAuth}) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,9 +19,15 @@ export default function SignInPage() {
         .then(data => {
             console.log(data.data, "came from user login...");
             if ( data.data.status === 'OK') {
-                alert("login success")
-                window.localStorage.setItem("token", data.data.data)
-                window.location.href = './userData'
+                setIsAuth(true);
+                setTimeout(() => {
+                    alert("login success")
+                    window.localStorage.setItem("token", data.data.data)
+                    window.location.href = './userData';
+                }, 100);
+
+            } else {
+                alert("Error! " + data.data.error)
             }
         })
 

@@ -8,7 +8,7 @@ const UserModel = new mongoose.Schema({
         status: String,
     }, 
     {
-        colloction: 'UserData'
+        collection: 'UserData'
     }
 )
 

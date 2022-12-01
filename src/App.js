@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import LandingPage from './components/pages/LandingPage'
@@ -11,16 +11,19 @@ import UserData from './components/UserData.jsx';
 import './App.css'
 
 export default function App() {
+
+    const [isAuth, setIsAuth] = useState(false);
+
     return (
         <Router>
             <div>
                 <Switch>
                     <Route exact path="/" component={ LandingPage } />
-                    <Route path="/login" component={ LoginPage } />
-                    <Route path="/register" component={ RegisterPage } />
+                    <Route path="/login" component={() => <LoginPage setIsAuth={setIsAuth} /> } />
+                    <Route path="/register" component={() => <RegisterPage setIsAuth={setIsAuth} /> } />
                     <Route path="/forget-password" component={ ForgetPasswordPage } />
                     <Route path="/home" component={ HomePage } />
-                    <Route path="/userData" component={ UserData } />
+                    <Route path="/userData" component={() => <UserData isAuth={isAuth} /> } />
                 </Switch>
                 <Footer />
             </div>

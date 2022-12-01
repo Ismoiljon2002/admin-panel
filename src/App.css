@@ -13,7 +13,7 @@ body {
 .m-5-auto {
     margin: 5rem auto
 }
-
+th > input, td > input {width: 30px;}
 .primary-button {
     margin-top: 5rem;
     margin-right: 1rem;
