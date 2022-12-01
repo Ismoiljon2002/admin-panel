@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "axios": "^1.1.3",
+    "bcryptjs": "^2.4.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
@@ -28,5 +32,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "> Simple login/register-page-app created with React js.",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismoiljon2002/itransition-task4.git"
+  },
+  "author": "Ismoiljon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ismoiljon2002/itransition-task4/issues"
+  },
+  "homepage": "https://github.com/ismoiljon2002/itransition-task4#readme"
 }

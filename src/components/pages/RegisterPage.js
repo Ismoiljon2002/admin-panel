@@ -1,30 +1,57 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios';
 import '../../App.css'
 
 export default function SignUpPage() {
+
+    const nameInput = useRef();
+    const emailInput = useRef();
+    const passwordInput = useRef();
+    
+    function registerUser(e) {
+        e.preventDefault();
+        const regisrationTime = new Date();
+        const name = nameInput.current.value;
+        const email = emailInput.current.value;
+        const password = passwordInput.current.value;
+        
+        console.log(name, email, password, regisrationTime);
+        axios.post("http://localhost:1879/register", {
+            name, 
+            email, 
+            password,
+            regisrationTime,
+            status: "Active",
+        })
+        .then(data => {
+            console.log(data, "came from user reg...")
+            if ( data.status === 200) {
+                alert("register success")
+                window.localStorage.setItem("token", data.data.data)
+                // window.location.href = './userData'
+            }
+        })  
+    }
 
     return (
         <div className="text-center m-5-auto">
             <h2>Join us</h2>
             <h5>Create your personal account</h5>
-            <form action="/home">
+            <form action="/home" onSubmit={registerUser}>
                 <p>
-                    <label>Username</label><br/>
-                    <input type="text" name="first_name" required />
+                    <label>name</label><br/>
+                    <input ref={nameInput} type="text" name="first_name" required />
                 </p>
                 <p>
                     <label>Email address</label><br/>
-                    <input type="email" name="email" required />
+                    <input ref={emailInput} type="email" name="email" required />
                 </p>
                 <p>
                     <label>Password</label><br/>
-                    <input type="password" name="password" requiredc />
+                    <input ref={passwordInput} type="password" name="password" required />
                 </p>
-                <p>
-                    <input type="checkbox" name="checkbox" id="checkbox" required /> <span>I agree all statements in <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of service</a></span>.
-                </p>
+                
                 <p>
                     <button id="sub_btn" type="submit">Register</button>
                 </p>
